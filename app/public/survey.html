@@ -181,9 +181,7 @@
                 &times;
               </button>
             </div>
-            <div class="modal-body">
-              <p id="modal">Some text in the modal.</p>
-            </div>
+            <div class="modal-body" id="modal"></div>
             <div class="modal-footer">
               <button
                 type="button"
@@ -237,7 +235,9 @@
 
         $.post("/api/friends", personData, function(data) {
           console.log(data.name);
-          $(".modal-body").html(data.name);
+
+          var image = $("<img>").attr("src", data.photo);
+          $(".modal-body").append(image, data.name);
         });
       });
     </script>
