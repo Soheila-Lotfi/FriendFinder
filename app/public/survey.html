@@ -33,7 +33,7 @@
 
       <h3><strong>Question 1</strong></h3>
       <h4>Your mind is always buzzing with unexplored ideas and plans.</h4>
-      <select id="q1">
+      <select calss="selected" id="q1">
         <option value=""></option>
         <option value="1">1 (Strongly Disagree)</option>
         <option value="2">2</option>
@@ -47,7 +47,7 @@
         Generally speaking, you rely more on your experience than your
         imagination.
       </h4>
-      <select id="q2">
+      <select calss="selected" id="q2">
         <option value=""></option>
         <option value="1">1 (Strongly Disagree)</option>
         <option value="2">2</option>
@@ -61,7 +61,7 @@
         You find it easy to stay relaxed and focused even when there is some
         pressure.
       </h4>
-      <select id="q3">
+      <select calss="selected" id="q3">
         <option value=""></option>
         <option value="1">1 (Strongly Disagree)</option>
         <option value="2">2</option>
@@ -72,7 +72,7 @@
 
       <h3><strong>Question 4</strong></h3>
       <h4>You rarely do something just out of sheer curiosity.</h4>
-      <select id="q4">
+      <select calss="selected" id="q4">
         <option value=""></option>
         <option value="1">1 (Strongly Disagree)</option>
         <option value="2">2</option>
@@ -83,7 +83,7 @@
 
       <h3><strong>Question 5</strong></h3>
       <h4>People can rarely upset you.</h4>
-      <select id="q5">
+      <select calss="selected" id="q5">
         <option value=""></option>
         <option value="1">1 (Strongly Disagree)</option>
         <option value="2">2</option>
@@ -96,7 +96,7 @@
       <h4>
         It is often difficult for you to relate to other people’s feelings.
       </h4>
-      <select id="q6">
+      <select calss="selected" id="q6">
         <option value=""></option>
         <option value="1">1 (Strongly Disagree)</option>
         <option value="2">2</option>
@@ -110,7 +110,7 @@
         In a discussion, truth should be more important than people’s
         sensitivities.
       </h4>
-      <select id="q7">
+      <select calss="selected" id="q7">
         <option value=""></option>
         <option value="1">1 (Strongly Disagree)</option>
         <option value="2">2</option>
@@ -121,7 +121,7 @@
 
       <h3><strong>Question 8</strong></h3>
       <h4>You rarely get carried away by fantasies and ideas.</h4>
-      <select id="q8">
+      <select calss="selected" id="q8">
         <option value=""></option>
         <option value="1">1 (Strongly Disagree)</option>
         <option value="2">2</option>
@@ -135,7 +135,7 @@
         You think that everyone’s views should be respected regardless of
         whether they are supported by facts or not.
       </h4>
-      <select id="q9">
+      <select calss="selected" id="q9">
         <option value=""></option>
         <option value="1">1 (Strongly Disagree)</option>
         <option value="2">2</option>
@@ -148,7 +148,7 @@
       <h4>
         You feel more energetic after spending time with a group of people.
       </h4>
-      <select id="q10">
+      <select calss="selected" id="q10">
         <option value=""></option>
         <option value="1">1 (Strongly Disagree)</option>
         <option value="2">2</option>
@@ -164,8 +164,6 @@
         type="submit"
         class="btn btn-primary btn-lg btn-block"
         id="submit"
-        data-toggle="modal"
-        data-target="#myModal"
       >
         <i class="fa fa-check-circle" aria-hidden="true"></i> Submit
       </button>
@@ -206,6 +204,7 @@
       </footer>
     </div>
     <script>
+      // when the user click the submit button, post the information to the server
       $("#submit").on("click", function(event) {
         event.preventDefault();
 
@@ -221,23 +220,42 @@
           $("#q9").val(),
           $("#q10").val()
         ];
-        console.log(scores);
-        var personData = {
-          name: $("#name")
-            .val()
-            .trim(),
-          photo: $("#photo")
-            .val()
-            .trim(),
-          scores: scores
-        };
-        console.log(personData);
-
-        $.post("/api/friends", personData, function(data) {
-          console.log(data.name);
-          var image = $("<img>").attr("src", data.photo);
-          $(".modal-body").append(image, data.name);
+        // validate the form
+        var isValid = true;
+        $(".form-control").each(function() {
+          if ($(this).val() === "") {
+            isValid = false;
+          }
         });
+        $(".selected").each(function() {
+          if ($(this).val() === "") {
+            isValid = false;
+          }
+        });
+        //----------------------
+        if (isValid) {
+          var personData = {
+            name: $("#name")
+              .val()
+              .trim(),
+            photo: $("#photo")
+              .val()
+              .trim(),
+            scores: scores
+          };
+
+          $.post("/api/friends", personData, function(data) {
+            var image = $("<img>").attr("src", data.photo);
+            $(".modal-body").append(image, data.name);
+          });
+          // show the modal
+          $("#myModal").modal("toggle");
+          // clear the form after posting the data
+          $("#name").text("");
+          $("#photo").text("");
+        } else {
+          alert("please fill out all fields before submitting");
+        }
       });
     </script>
   </body>
