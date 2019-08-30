@@ -64,8 +64,7 @@ Soheila Lotfi
 7. Once the current user's most compatible friend is found, the result will be displayed as a modal pop-up.
 
 
+![image](https://user-images.githubusercontent.com/49765334/64050588-8b7ec100-cb46-11e9-9ce3-b4939a7392b8.png)
 
-![image](https://user-images.githubusercontent.com/49765334/64050313-a1d84d00-cb45-11e9-86b3-feaf5c83607c.png)
-![image](https://user-images.githubusercontent.com/49765334/64050526-52465100-cb46-11e9-9e46-6dadfe619824.png)
 
 
