@@ -1,4 +1,6 @@
-# FriendFinder
+# FriendFinder 
+
+The app can be found at https://agile-tor-47992.herokuapp.com/
 
 By:
 
@@ -61,4 +63,12 @@ Soheila Lotfi
 
 7. Once the current user's most compatible friend is found, the result will be displayed as a modal pop-up.
 
-I used Express to handle routing. 
+
+
+![image](https://user-images.githubusercontent.com/49765334/64067993-cbee4580-cbff-11e9-8d68-300df9310e22.png)
+
+
+![image](https://user-images.githubusercontent.com/49765334/64050588-8b7ec100-cb46-11e9-9ce3-b4939a7392b8.png)
+
+
+
